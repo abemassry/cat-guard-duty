@@ -26,7 +26,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.post('/callback', routes.handleNinjaCallback);
+//app.post('/callback', routes.handleNinjaCallback);
+app.post('/', routes.handleNinjaCallback);
 
 http.createServer(app).listen(app.get('port'), function(){
 

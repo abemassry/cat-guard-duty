@@ -29,8 +29,8 @@ exports.handleNinjaCallback = function(req, res){
 
   // This little bit of code will turn your LED light off
   // if it changes to anything but off.
-  if (req.body.GUID === RGBLEDGUID && req.body.DA !== "000000") {
-    ninja.device(RGBLEDGUID).actuate('000000');
+  if (req.body.GUID === RGBLEDGUID && req.body.DA !== "FF0000") {
+    ninja.device(RGBLEDGUID).actuate('FF0000');
   }
 
   // Very important to end the response.
