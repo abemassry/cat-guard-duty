@@ -1,0 +1,29 @@
+// Overview
+[Actuator C]-[Driver C]
+[Sensor B]-[Driver B]
+[Sensor A]-[Driver A]
+[Driver C]->[Ninja Block]
+[Driver B]->[Ninja Block]
+[Driver A]->[Ninja Block]
+[Ninja Block]<->[Ninja Platform]
+[Ninja Platform]<->[Ninja App 1]
+[Ninja Platform]<->[Ninja App 2]
+
+// Driver
+[Hardware]-[Device Class (lib/Device.js)]
+[Device Class (lib/Device.js)]->[Factory (index.js)]
+[Device Class (lib/Device.js)]-[note: Instantiated by factory and registered with Driver Controller{bg:cornsilk}]
+[Device Class (lib/Device.js)]-[note: emits data and has a write method{bg:cornsilk}]
+[Factory (index.js)]-register event>[Driver Controller]
+
+// Apps
+[Device (via Block)]-emits data>[Ninja Platform]
+[Ninja Platform]-POSTS data>[Ninja App 1]
+[Ninja Platform]-[note: The app registers a callback per device{bg:cornsilk}]
+
+//apps pt 2
+[Device (via Block)]<-writes data[Ninja Platform]
+[Ninja Platform]<PUTs actuation-[Ninja App 1]
+
+
+//
