@@ -25,9 +25,10 @@ ninja.devices(function(err,devices) {
  */
 exports.handleNinjaCallback = function(req, res){
 
+  console.log('Received %s from %s',req.body.DA,req.body.GUID);
+
   // This little bit of code will turn your LED light off
   // if it changes to anything but off.
-
   if (req.body.GUID === RGBLEDGUID && req.body.DA !== "000000") {
     ninja.device(RGBLEDGUID).actuate('000000');
   }
