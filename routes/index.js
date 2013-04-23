@@ -2,6 +2,7 @@
 // Configuration
 var USER_ACCESS_TOKEN = 't4Y6i7zImanykG7BGBEF6vSH54A1BVLoyt6YfwFNUbU';  // https://a.ninja.is/hacking
 var RGBLEDGUID        = '1012BB013266_0_0_1007';        // https://a.ninja.is/home
+var RF433             = '1012BB013266_0_0_11';  //https://a.ninja.is/rest/v0/device/1012BB013266_0_0_11
 
 
 // Instantiate a new ninja app
@@ -32,6 +33,7 @@ exports.handleNinjaCallback = function(req, res){
   if (req.body.GUID === RGBLEDGUID && req.body.DA !== "FF0000") {
     ninja.device(RGBLEDGUID).actuate('FF0000');
   }
+  //if (req.body.GUID === RF433) {
 
   // Very important to end the response.
   res.end();
