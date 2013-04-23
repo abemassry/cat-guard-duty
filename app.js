@@ -32,9 +32,15 @@ if ('development' == app.get('env')) {
 app.post('/', routes.handleNinjaCallback);
 
 app.get('/status', function(req, res) {
-	client.get('threatLevel', function(err, reply) {
-		console.log( reply );
-	});
+  var body = null;
+
+   client.get('detectImage', function(err, reply) {
+		body = '<img src="' + reply + '">';
+		res.setHeader('Content-Type', 'text/html');
+  		res.setHeader('Content-Length', body.length);
+  		res.end(body);
+   });
+
 });
 
 app.get('/setStatus', function(req, res) {
