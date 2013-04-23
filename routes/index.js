@@ -33,6 +33,10 @@ exports.handleNinjaCallback = function(req, res){
   if (req.body.GUID === RGBLEDGUID && req.body.DA !== "FF0000") {
     ninja.device(RGBLEDGUID).actuate('FF0000');
   }
+  if (req.body.GUID === RF433 && req.body.DA === "010101010101010101010101") {
+    //ninja.device(RF433).actuate('010101010101010101010101');
+    ninja.device(RF433).actuate('110101010100010100110000');
+  }
   //if (req.body.GUID === RF433) {
 
   // Very important to end the response.
