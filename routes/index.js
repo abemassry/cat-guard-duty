@@ -1,6 +1,6 @@
 
 // Configuration
-var USER_ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN';  // https://a.ninja.is/hacking
+var USER_ACCESS_TOKEN = 't4Y6i7zImanykG7BGBEF6vSH54A1BVLoyt6YfwFNUbU';  // https://a.ninja.is/hacking
 var RGBLEDGUID        = 'RGBLED_GUID';        // https://a.ninja.is/home
 
 
