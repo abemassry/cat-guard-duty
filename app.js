@@ -35,7 +35,7 @@ app.get('/status', function(req, res) {
   var body = null;
 
    client.get('detectImage', function(err, reply) {
-		body = '<img src="' + reply + '">';
+		body = '<img src="/img/detectedImage.jpg">';
 		res.setHeader('Content-Type', 'text/html');
   		res.setHeader('Content-Length', body.length);
   		res.end(body);

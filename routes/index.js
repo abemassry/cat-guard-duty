@@ -4,8 +4,9 @@ var USER_ACCESS_TOKEN = 't4Y6i7zImanykG7BGBEF6vSH54A1BVLoyt6YfwFNUbU';  // https
 var RGBLEDGUID        = '1012BB013266_0_0_1007';        // https://a.ninja.is/home
 var RF433             = '1012BB013266_0_0_11';  //https://a.ninja.is/rest/v0/device/1012BB013266_0_0_11
 
-
+var http = require('http');
 var request = require('request');
+var fs = require('fs');
 var redis = require('redis'),
     client = redis.createClient();
 
@@ -29,21 +30,23 @@ ninja.devices(function(err,devices) {
  */
 exports.handleNinjaCallback = function(req, res){
 
-  console.log('Received %s from %s',req.body.DA,req.body.GUID);
+  //console.log('Received %s from %s',req.body.DA,req.body.GUID);
 
   // This little bit of code will turn your LED light off
   // if it changes to anything but off.
   if (req.body.GUID === RGBLEDGUID && req.body.DA !== "FF0000") {
     ninja.device(RGBLEDGUID).actuate('FF0000');
-    request('https://stream.ninja.is/rest/v0/camera/872828B6E8F82732_U0_0_1004/snapshot?user_access_token=LdaO3OdcE1u0ewnKgYNu4vDPklzxKxlvNp52yaSDmk', function(error, response, bodyF) {
-      client.set('detectImage', bodyF);
-    });
+      http.get('http://10.37.110.231/snapshot.cgi?user=admin&pwd=', function(res) {
+        res.pipe(fs.createWriteStream('/Users/spider/ninjablocks/nodeph-sample-app/public/img/detectedImage.jpg'));
+      console.log("saving image, data is "+req.body.GUID+" and "+req.body.DA);
+      });
+      http.post
 
   }
-  if (req.body.GUID === RF433) {
-    //ninja.device(RF433).actuate('010101010101010101010101');
-    ninja.device(RF433).actuate('110110101101101011010100');
-  }
+  //if (req.body.GUID === RF433) {
+  //  //ninja.device(RF433).actuate('010101010101010101010101');
+  //  ninja.device(RF433).actuate('110110101101101011010100');
+  //}
   //if (req.body.GUID === RF433) {
 
   // Very important to end the response.
