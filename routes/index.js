@@ -5,6 +5,7 @@ var RGBLEDGUID        = '1012BB013266_0_0_1007';        // https://a.ninja.is/ho
 var RF433             = '1012BB013266_0_0_11';  //https://a.ninja.is/rest/v0/device/1012BB013266_0_0_11
 
 
+var request = require('request');
 // Instantiate a new ninja app
 var ninja = require('ninja-blocks').app({user_access_token:USER_ACCESS_TOKEN});
 // Create a container for these devices
@@ -31,10 +32,14 @@ exports.handleNinjaCallback = function(req, res){
   // if it changes to anything but off.
   if (req.body.GUID === RGBLEDGUID && req.body.DA !== "FF0000") {
     ninja.device(RGBLEDGUID).actuate('FF0000');
+    request('https://stream.ninja.is/rest/v0/camera/872828B6E8F82732_U0_0_1004/snapshot?user_access_token=LdaO3OdcE1u0ewnKgYNu4vDPklzxKxlvNp52yaSDmk', function(error, response, bodyF) {
+      
+    });
+
   }
-  if (req.body.GUID === RF433 && req.body.DA === "010101010101010101010101") {
+  if (req.body.GUID === RF433) {
     //ninja.device(RF433).actuate('010101010101010101010101');
-    ninja.device(RF433).actuate('110101010100010100110000');
+    ninja.device(RF433).actuate('110110101101101011010100');
   }
   //if (req.body.GUID === RF433) {
 
