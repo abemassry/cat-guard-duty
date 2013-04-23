@@ -16,7 +16,6 @@ var DEVICES = {};
 // Unfortunately it requires the app to be restarted to pull new devices.
 // You can put this into a setInterval to avoid this.
 ninja.devices(function(err,devices) {
-
   DEVICES = devices;
 });
 

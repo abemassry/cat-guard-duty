@@ -10,6 +10,9 @@ var express = require('express')
 
 var app = express();
 
+var redis = require('redis'),
+	client = redis.createClient();
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -29,7 +32,16 @@ if ('development' == app.get('env')) {
 //app.post('/callback', routes.handleNinjaCallback);
 app.post('/', routes.handleNinjaCallback);
 
-http.createServer(app).listen(app.get('port'), function(){
+app.get('/status', function(req, res) {
+	client.get('threatLevel', function(err, reply) {
+		console.log( reply );
+	});
+});
 
+app.get('/setStatus', function(req, res) {
+	client.set('threatLevel', 1);
+});
+
+http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
