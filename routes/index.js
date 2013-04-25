@@ -1,8 +1,7 @@
-
 // Configuration
-var USER_ACCESS_TOKEN = 't4Y6i7zImanykG7BGBEF6vSH54A1BVLoyt6YfwFNUbU';  // https://a.ninja.is/hacking
-var RGBLEDGUID        = '1012BB013266_0_0_1007';        // https://a.ninja.is/home
-var RF433             = '1012BB013266_0_0_11';  //https://a.ninja.is/rest/v0/device/1012BB013266_0_0_11
+var USER_ACCESS_TOKEN = 'USER_ACCESS_CODE_FROM_DEVICE';  // https://a.ninja.is/hacking
+var RGBLEDGUID        = 'FROM_JSON_DOC_LED';        // https://a.ninja.is/home
+var RF433             = 'FROM_JSON_DOC_RF433';  //https://a.ninja.is/rest/v0/device/1012BB013266_0_0_11
 
 var http = require('http');
 var request = require('request');
@@ -36,8 +35,8 @@ exports.handleNinjaCallback = function(req, res){
   // if it changes to anything but off.
   if (req.body.GUID === RGBLEDGUID && req.body.DA !== "FF0000") {
     ninja.device(RGBLEDGUID).actuate('FF0000');
-      http.get('http://10.37.110.231/snapshot.cgi?user=admin&pwd=', function(res) {
-        res.pipe(fs.createWriteStream('/Users/spider/ninjablocks/nodeph-sample-app/public/img/detectedImage.jpg'));
+      http.get('http://addressofipcam/', function(res) {
+        res.pipe(fs.createWriteStream('public/img/detectedImage.jpg'));
       console.log("saving image, data is "+req.body.GUID+" and "+req.body.DA);
       });
       http.post
